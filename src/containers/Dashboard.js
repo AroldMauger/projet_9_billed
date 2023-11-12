@@ -66,7 +66,7 @@ export const getStatus = (index) => {
       return "refused"
   }
 }
-
+//Ici le constructeur configure les gestionnaires d'événements "click" pour les icones fléchés
 export default class {
   constructor({ document, onNavigate, store, bills, localStorage }) {
     this.document = document
@@ -95,7 +95,7 @@ export default class {
       $(`#open-bill${bill.id}`).css({ background: '#2A2B35' })
       $('.dashboard-right-container div').html(DashboardFormUI(bill))
       $('.vertical-navbar').css({ height: '150vh' })
-      this.counter ++
+    this.counter ++
     } else {
       $(`#open-bill${bill.id}`).css({ background: '#0D5AE5' })
 
@@ -146,6 +146,9 @@ export default class {
     }
 
     bills.forEach(bill => {
+      //On utilise la méthode off() sur le click pour que la méthode handleEditTicket soit réinitialisé à chaque nouveau clic sur un ticket
+      // Dans l'état initial sans le "off", c'est comme si on permettait le click que sur les tickets seulement juste après avoir ouvert une liste
+      $(`#open-bill${bill.id}`).off("click");
       $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
     })
 

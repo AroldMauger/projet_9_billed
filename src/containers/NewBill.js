@@ -10,21 +10,35 @@ export default class NewBill {
     formNewBill.addEventListener("submit", this.handleSubmit)
     const file = this.document.querySelector(`input[data-testid="file"]`)
     file.addEventListener("change", this.handleChangeFile)
+    //file.setAttribute("accept", "image/png, image/jpeg, image/jpg")   //Ajout de l'attribut pour permettre uniquement JPG/JPEG/PNG
     this.fileUrl = null
     this.fileName = null
     this.billId = null
     new Logout({ document, localStorage, onNavigate })
   }
+  // ici on définit les formats autorisés
+  allowedFormats(format) {
+    return ['image/jpeg', 'image/jpg', 'image/png'].includes(format);
+  }
+
   handleChangeFile = e => {
     e.preventDefault()
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
+
+    // Ici on vérifie le format du fichier uploadé
+    if(!this.allowedFormats(file.type)) {
+      this.document.querySelector(`input[data-testid="file"]`).value = "";
+      alert("Format de fichier invalide. Veuillez joindre un fichier au format jpeg, jpg ou png.")
+      return;
+    }
+
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
     formData.append('email', email)
-
+    console.log(file)
     this.store
       .bills()
       .create({
