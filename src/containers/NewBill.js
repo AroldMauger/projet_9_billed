@@ -10,7 +10,7 @@ export default class NewBill {
     formNewBill.addEventListener("submit", this.handleSubmit)
     const file = this.document.querySelector(`input[data-testid="file"]`)
     file.addEventListener("change", this.handleChangeFile)
-    //file.setAttribute("accept", "image/png, image/jpeg, image/jpg")   //Ajout de l'attribut pour permettre uniquement JPG/JPEG/PNG
+    file.setAttribute("accept", "image/png, image/jpeg, image/jpg")   //Ajout de l'attribut pour permettre uniquement JPG/JPEG/PNG
     this.fileUrl = null
     this.fileName = null
     this.billId = null
