@@ -79,7 +79,7 @@ describe("Given I am a user connected as Employee", () => {
       document.body.appendChild(root)
       router()
     })
-    test("catch bills from an API and test 404 message error", async () => {
+    test("fetches bills from an API and fails with 404 message error", async () => {
 
       mockStore.bills.mockImplementationOnce(() => {
         return {
@@ -93,7 +93,7 @@ describe("Given I am a user connected as Employee", () => {
         expect(message).toBeTruthy()
     })
 
-    test("catch bills from an API and test 500 message error", async () => {
+    test("fetches bills from an API and fails with 500 message error", async () => {
       mockStore.bills.mockImplementationOnce(() => {
         return {
           list : () =>  {
@@ -116,7 +116,7 @@ describe("Given I am a user connected as Employee", () => {
 // TEST DE LA NAVIGATION VERS NewBill à partir de Bills.js
 describe("Given I am a user connected as Employee", () => {
   describe("When I am on Bills Page", () => {
-    test("I click on the button called 'Nouvelle note de frais' and navigate to NewBill page", async () => {
+    test("Then when click on the button called 'Nouvelle note de frais' I should navigate to NewBill page", async () => {
 
       const onNavigate = jest.fn();   // On crée une fonction exploitable par Jest avec .fn()
       const bills = new Bills({       // On récupère l'instance de Bills pour avoir accès à onNavigate
@@ -140,7 +140,7 @@ describe("Given I am a user connected as Employee", () => {
 // TEST DU CLIC SUR L'ICONE DE L'OEIL
 describe("Given I am a user connected as Employee", () => {
   describe("When I am on Bills Page", () => {
-    test("I click on the eye icon and the function handleClickIconEye should be called", async () => {
+    test("Then when I click on the eye icon, the function handleClickIconEye should be called", async () => {
 
       const modalMock = jest.fn();        // On crée une fonction jest pour tester la fonction modal() de Bills.js
       $.fn.modal = modalMock;
