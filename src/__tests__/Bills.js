@@ -123,10 +123,8 @@ describe("Given I am a user connected as Employee", () => {
         document,
         onNavigate
       });
-
       const createNewBillButton = screen.getByTestId("btn-new-bill");     // On récupère le bouton pour créer nouvelle facture
       fireEvent.click(createNewBillButton);                               // On met l'événement de clic
-
       // Vérification de la navigation vers NewBill
       expect(onNavigate).toHaveBeenCalledWith(ROUTES_PATH['NewBill']);  // On vérifie que la route NewBill a bien été appelée
     });
